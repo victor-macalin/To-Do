@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class ToDoListService {
 
-    private ToDoListRepository toDoListRepository;
-    private ToDoListMapper toDoListMapper;
+    private  final ToDoListRepository toDoListRepository;
+    private  final ToDoListMapper toDoListMapper;
 
 
     public ToDoListService(ToDoListRepository toDoListRepository, ToDoListMapper toDoListMapper) {
@@ -37,7 +37,6 @@ public class ToDoListService {
         return toDoListModels.stream()
                 .map(toDoListMapper::map)
                 .collect(Collectors.toList());
-
     }
 
     //Ver tarefas pendentes
@@ -54,6 +53,7 @@ public class ToDoListService {
         if (model.isPresent()) {
             ToDoListModel tarefa = toDoListMapper.map(toDoListDto);
             tarefa.setId(id);
+            toDoListRepository.save(tarefa);
             return toDoListMapper.map(tarefa);
         } else {
             return null;
