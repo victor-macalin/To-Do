@@ -59,7 +59,6 @@ public class ToDoListService {
             return null;
         }
     }
-
     //Deletar tarefas
     public void delete(Long id) {
         Optional<ToDoListModel> model = toDoListRepository.findById(id);
